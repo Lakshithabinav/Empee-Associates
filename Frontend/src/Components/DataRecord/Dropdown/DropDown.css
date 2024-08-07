@@ -1,0 +1,88 @@
+/* Variables */
+:root {
+  --demo-blue: #005BA6;
+  --demo-gray: #D6D6D6;
+  --demo-placeholder: #C7C7C7;
+  --demo-border: #E6E6E6;
+  --border-width: 3px;
+  --option-padding: 12px 15px;
+  --option-border: 1px solid #ddd;
+  --option-hover-bg: #f5f5f5;
+  --option-hover-color: var(--demo-blue);
+  --box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  --arrow-size: 10px;
+}
+
+/* Container for the select element */
+.form-input-select {
+  position: relative;
+
+  width: 100%;
+}
+
+/* Custom select styles */
+.custom-select {
+  border: var(--border-width) solid var(--demo-border);
+  border-radius: 5px;
+  font-weight: 400;
+  color: inherit;
+  padding: var(--option-padding);
+  width: 100%;
+  min-width: 300px;
+  max-width: 400px;
+  background-color: #fff;
+  cursor: pointer;
+  box-shadow: var(--box-shadow);
+  appearance: none; /* Remove default styling */
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  position: relative; /* Needed for arrow positioning */
+}
+
+/* Focus and Hover states */
+.custom-select:focus {
+  box-shadow: 0 3px 6px rgba(var(--demo-blue), 0.3) inset;
+  border-color: var(--demo-blue);
+  outline: none; /* Remove default outline */
+}
+
+
+
+.custom-select:invalid {
+  color: var(--demo-placeholder);
+}
+
+/* Arrow mark */
+.custom-select::after {
+  content: '';
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 5px solid transparent;
+  border-top-color: var(--demo-gray);
+  pointer-events: none; /* Allow click events to pass through */
+  transition: border-top-color 0.2s ease;
+}
+
+.custom-select:focus::after {
+  border-top-color: var(--demo-blue);
+}
+
+/* Dropdown menu styles */
+.custom-select option {
+  padding: var(--option-padding);
+}
+
+.custom-select option:hover {
+  background-color: var(--option-hover-bg);
+  color: var(--option-hover-color);
+}
+
+/* Global styles */
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}

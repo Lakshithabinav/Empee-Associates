@@ -1,0 +1,24 @@
+.navButtonOuterDiv {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.navButtonLink {
+    text-decoration: none;
+    color: black;
+    font-size: larger;
+    transition: color 0.3s, font-weight 0.3s;
+}
+
+.navButtonLink.active {
+    color:  #0056b3; /* Highlight color */
+    font-weight: bold;
+}
+
+.navButtonLink p {
+    margin: 0;
+}
+.navButtonLink:hover{
+    color:  #0056b3; 
+}
