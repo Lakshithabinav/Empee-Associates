@@ -1,4 +1,3 @@
-// DataRecord.js
 import React, { useState } from 'react';
 import axios from 'axios';
 import './DataRecord.css';
@@ -54,7 +53,7 @@ function DataRecord() {
   const calculateTotals = (data) => {
     const totals = data.reduce(
       (acc, item) => {
-        acc.totalLots += item.noOfLoot - 1;
+        acc.totalLots += item.noOfLoot ;
         acc.totalWeight += item.weight / 100;
         return acc;
       },
@@ -63,13 +62,23 @@ function DataRecord() {
     return totals;
   };
 
+  const formatNumber = (num) => {
+    return num.toLocaleString('en-IN');
+  };
+  const handlePrint=()=>{
+    window.print();
+  }
+
   const renderTable = (data, type, title) => {
     if (!data || data.length === 0) return null;
 
     const totals = calculateTotals(data);
     return (
       <div className='reports-page__report-data'>
-        <h2 className='reports-page__report-title'>{title}</h2>
+        <div className='tableTitle-div'>
+          <h2 className='reports-page__report-title'>{title}</h2>
+          <button onClick={handlePrint} className='printButton'>Print</button>
+        </div>
         <table className='reports-page__table'>
           <thead>
             <tr>
@@ -85,17 +94,17 @@ function DataRecord() {
               <tr key={item.id}>
                 <td>{index + 1}</td>
                 <td>{type === 'date' ? item.date : formatTimestamp(item.timeStamp, type)}</td>
-                <td>{item.noOfLoot - 1}</td>
-                <td>{item.weight / 100}</td>
-                <td>{item.totalAccum / 100}</td>
+                <td>{formatNumber(item.noOfLoot )}</td>
+                <td>{formatNumber(item.weight / 100)}</td>
+                <td>{formatNumber(item.totalAccum / 100)}</td>
               </tr>
             ))}
           </tbody>
           <tfoot>
             <tr>
               <td colSpan="2">Totals</td>
-              <td>{totals.totalLots}</td>
-              <td>{totals.totalWeight}</td>
+              <td>{formatNumber(totals.totalLots)}</td>
+              <td>{formatNumber(totals.totalWeight)}</td>
               <td></td>
             </tr>
           </tfoot>
@@ -171,9 +180,9 @@ function DataRecord() {
 
       {error && <div className='reports-page__error'>{error}</div>}
       
-      {reportType === 'date' && renderTable(dateReportData, 'time', `Report Data (Today)`)}
-      {reportType === 'time' && renderTable(timeReportData, 'time', 'Report Data (Today)')}
-      {reportType === 'dateRange' && renderTable(dateRangeReportData, 'date', `Report Data (${startDate} - ${endDate})`)}
+      {reportType === 'date' && renderTable(dateReportData, 'time', `Production Report (${date})`)}
+      {reportType === 'time' && renderTable(timeReportData, 'time', `Production Report (${startTime} - ${endTime})`)}
+      {reportType === 'dateRange' && renderTable(dateRangeReportData, 'date', `Production Report (${startDate} - ${endDate})`)}
     </div>
   );
 }

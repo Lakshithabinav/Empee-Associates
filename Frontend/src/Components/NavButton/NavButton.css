@@ -22,3 +22,8 @@
 .navButtonLink:hover{
     color:  #0056b3; 
 }
+@media print{
+    .navButtonOuterDiv{
+        display: none;
+    }
+}
