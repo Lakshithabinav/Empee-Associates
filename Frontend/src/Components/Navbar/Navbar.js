@@ -12,11 +12,14 @@ function Navbar() {
         dispatch(logedout())
     }
   return (
+    <>
     <div className='NavouterDiv'>
       <p className='nav-title'>Ponmurugan Dhall Mill</p>
       <div className='logoutDiv' onClick={handleLogout}><IoIosLogOut className='logout'/></div>
       
     </div>
+    <div className='simple-div'></div>
+    </>
   )
 }
 

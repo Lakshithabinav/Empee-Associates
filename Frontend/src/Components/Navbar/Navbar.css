@@ -5,8 +5,14 @@
     display: flex;
     align-items: center; 
     justify-content: center; 
-    position: relative;
+    position: fixed;
+    background-color: white;
+    z-index: 150;
    
+}
+.simple-div{
+    height: 100px;
+
 }
 .NavouterDiv img {
     height: 100%; 
