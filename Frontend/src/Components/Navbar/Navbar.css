@@ -43,4 +43,10 @@
     .nav-title{
         font-size: 25px;
     }
+    
+}
+@media print{
+    .logoutDiv{
+        display: none;
+    }
 }

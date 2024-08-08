@@ -19,6 +19,16 @@
             "projectName": "TeltonikaTesting",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-EmpeeAssociationApplication<EmpeeAssociation>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.example.empeeAssociation.EmpeeAssociationApplication",
+            "projectName": "EmpeeAssociation",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
         }
     ]
 }

@@ -36,21 +36,20 @@ function Monitoring() {
 
   useEffect(() => {
     const handleMessage = (message) => {
-      if (Array.isArray(message)) {
+      
         try {
           console.log(message);
-          const currentData = message[0];
-          if (currentData.productionOfToday) {
-            const totalNoOfLoot = currentData.productionOfToday.reduce((acc, item) => acc + item.noOfLoot, 0);
-            const totalNoOfWeight = currentData.productionOfToday.reduce((acc, item) => acc + item.weight, 0);
+          if (message.productionOfToday) {
+            const totalNoOfLoot = message.productionOfToday.reduce((acc, item) => acc + item.noOfLoot, 0);
+            const totalNoOfWeight = message.productionOfToday.reduce((acc, item) => acc + item.weight, 0);
             setCurrentDayLot(totalNoOfLoot);
             setTodayProductionWeight(totalNoOfWeight);
-            setTodayProduction(currentData.productionOfToday);
+            setTodayProduction(message.productionOfToday);
           }
           
-          setLastUpdated(formatTimestamp(currentData.time));
+          setLastUpdated(formatTimestamp(message.dataModel[0].time));
           
-          message.forEach((item) => {
+          message.dataModel.forEach((item) => {
             switch (item.name) {
               case 'CurrentWeight':
                 setCurrentWeight(item.data);
@@ -80,9 +79,7 @@ function Monitoring() {
         } finally {
           setLoading(false);
         }
-      } else {
-        console.error('Received message is not an array', message);
-      }
+      
     };
 
     const handleTeltonikaError = (data) => {

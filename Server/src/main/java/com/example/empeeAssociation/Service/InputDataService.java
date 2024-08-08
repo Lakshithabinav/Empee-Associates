@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.empeeAssociation.Dao.DataModel;
+import com.example.empeeAssociation.Dao.DataModelAndProduction;
 import com.example.empeeAssociation.Entity.HourRecordOfPackageReport;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -21,6 +22,7 @@ public class InputDataService {
     private final DataToDatabase dataToDatabase;
     private final ObjectMapper objectMapper;
     public static volatile long dataReceivedTime;
+    
 
     @Autowired
     public InputDataService(DataToDatabase dataToDatabase, ObjectMapper objectMapper) {
@@ -32,7 +34,7 @@ public class InputDataService {
         return dataReceivedTime;
     }
 
-    public List<DataModel> decodeThedata(String encodedData) throws Exception {
+    public DataModelAndProduction decodeThedata(String encodedData) throws Exception {
         String decodedData = URLDecoder.decode(encodedData, StandardCharsets.UTF_8.toString());
         decodedData = decodedData.replaceAll("=$", "");
         decodedData = decodedData.replaceAll("\\\\", "");
@@ -50,10 +52,9 @@ public class InputDataService {
         System.out.println("Data Models: " + dataModels);
         dataToDatabase.dataSaveInDB(dataModels);
         List<HourRecordOfPackageReport> productionOfToday = fetchData.getDataOfaDay(LocalDate.now());
-        for (DataModel dataModel : dataModels) {
-            dataModel.setProductionOfToday(productionOfToday);
-        }
-        
-        return dataModels;
+        DataModelAndProduction dataModelAndProduction = new DataModelAndProduction();
+        dataModelAndProduction.setDataModel(dataModels);
+        dataModelAndProduction.setProductionOfToday(productionOfToday);
+        return dataModelAndProduction;
     }
 }

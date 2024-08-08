@@ -1,6 +1,7 @@
 package com.example.empeeAssociation.Controller;
 
 import com.example.empeeAssociation.Dao.DataModel;
+import com.example.empeeAssociation.Dao.DataModelAndProduction;
 import com.example.empeeAssociation.Entity.DailyRecordOfPackageReport;
 import com.example.empeeAssociation.Entity.HourRecordOfPackageReport;
 import com.example.empeeAssociation.Entity.MinuteRecordOfPackageReport;
@@ -43,10 +44,10 @@ public class TeltonikaController {
         try {
             System.out.println("Received encoded data: " + encodedData);
 
-            List<DataModel> dataModels = inputDataService.decodeThedata(encodedData);
+            DataModelAndProduction dataModelAndProduction = inputDataService.decodeThedata(encodedData);
            
-            messagingTemplate.convertAndSend("/topic/data", dataModels);
-
+            messagingTemplate.convertAndSend("/topic/data", dataModelAndProduction);
+            System.out.println(dataModelAndProduction);
 
             return ResponseEntity.ok("Data received and processed successfully.");
 

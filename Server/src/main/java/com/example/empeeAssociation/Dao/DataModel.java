@@ -14,7 +14,7 @@ public class DataModel {
     private String name;
     private long data;
     private LocalDateTime time;
-    private List<HourRecordOfPackageReport> productionOfToday; 
+
 
     @JsonProperty("data")
     public void setData(String data) {
@@ -22,17 +22,7 @@ public class DataModel {
     }
 
    
-   
-    public List<HourRecordOfPackageReport> getProductionOfToday() {
-        return productionOfToday;
-    }
-
-
-
-    public void setProductionOfToday(List<HourRecordOfPackageReport> productionOfToday) {
-        this.productionOfToday = productionOfToday;
-    }
-
+ 
 
 
     public long  getData() {
